@@ -1,6 +1,6 @@
 {
-  "name": "@sepo27/ts-lib",
-  "version": "0.1.0",
+  "name": "@sepo27/sqlb",
+  "version": "0.0.0",
   "description": "Ts lib boilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sepo27/ts-lib.git"
+    "url": "git+https://github.com/sepo27/sqlb.git"
   },
   "author": "Sergey Poskachey",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sepo27/ts-lib/issues"
+    "url": "https://github.com/sepo27/sqlb/issues"
   },
-  "homepage": "https://github.com/sepo27/ts-lib#readme",
+  "homepage": "https://github.com/sepo27/sqlb#readme",
   "devDependencies": {
     "@types/jest": "^23.3.11",
     "eslint": "^5.11.1",
