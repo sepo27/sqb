@@ -12,13 +12,34 @@
     "class-methods-use-this": "off",
     "newline-per-chained-call": "off",
     "prefer-destructuring": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+
+    "import/prefer-default-export": "off"
   },
 
   "extends": "airbnb-base",
   "parser": "typescript-eslint-parser",
   "env": {
+    "node": true,
     "jest/globals": true
   },
-  "plugins": ["jest"]
+  "plugins": ["typescript","jest"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts"
+        ]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "space-infix-ops": "off"
+      }
+    }
+  ]
 }
