@@ -1,5 +1,5 @@
-import { sprintf } from 'sprintf-js';
 import { QueryBlock } from '../coreInterfaces'; // eslint-disable-line no-unused-vars
+import { Sql } from '../sql/Sql';
 
 export class FromClause implements QueryBlock {
   private tableName: string;
@@ -12,16 +12,11 @@ export class FromClause implements QueryBlock {
   }
 
   toSql(): string {
-    let sql = 'FROM %s';
-    const params = [this.tableName];
-    if (this.alias) {
-      sql += ' AS %s';
-      params.push(this.alias);
-    }
-    return sprintf(sql, ...params);
+    return new Sql('FROM %s [AS %s]')
+      .print([this.tableName, this.alias]);
   }
 
   toPrettySql(): string {
-    return '';
+    return this.toSql();
   }
 }

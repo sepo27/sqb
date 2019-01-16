@@ -10,4 +10,9 @@ describe('FromClause', () => {
     const fc = new FromClause().table('user', 'u');
     expect(fc.toSql()).toEqual('FROM user AS u');
   });
+
+  xit('toPrettySql()', () => {
+    const fc = new FromClause().table('user', 'u');
+    expect(fc.toPrettySql()).toEqual('FROM user AS u');
+  });
 });
