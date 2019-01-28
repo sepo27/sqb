@@ -1,7 +1,7 @@
 import { sprintf } from 'sprintf-js';
 import { SqlError } from './SqlError';
 
-type SqlParam = string | boolean;
+type SqlParam = string | boolean | string[];
 
 interface SqlPart {
   readonly part: string;
@@ -42,7 +42,7 @@ export class Sql {
       }
     });
 
-    return sprintf(printParts.join(' '), ...printParams);
+    return sprintf(printParts.join(' '), ...printParams).trim();
   }
 
   private parse(sql: string) {
