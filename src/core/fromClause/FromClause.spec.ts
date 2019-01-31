@@ -35,4 +35,16 @@ describe('FromClause', () => {
       JOIN page AS p ON p.id = u.pageId
     `);
   });
+
+  it('does not add duplicate join', () => {
+    const fc = new FromClause()
+      .table('user', 'u')
+      .join('comment', 'c', 'c.id = u.commentId')
+      .join('comment', 'c', 'c.id = u.commentId');
+
+    assertSql(fc, `
+      FROM user AS u
+      JOIN comment AS c ON c.id = u.commentId
+    `);
+  });
 });

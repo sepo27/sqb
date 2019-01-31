@@ -14,7 +14,12 @@ export class FromClause implements QueryBlock {
   }
 
   join(...params: JoinTableParams): this {
+    if (this.joins.some(j => j.match(params))) {
+      return this;
+    }
+
     this.joins.push(new JoinClause().table(...params));
+
     return this;
   }
 
