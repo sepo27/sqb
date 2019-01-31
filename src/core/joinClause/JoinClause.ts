@@ -1,14 +1,14 @@
-import { QueryBlock } from '../coreInterfaces'; // eslint-disable-line no-unused-vars
+import { QueryBlock } from '../interfaces'; // eslint-disable-line no-unused-vars
 import { Sql } from '../sql/Sql';
 
-type TableParams = [string, string] | [string, string, string];
+export type JoinTableParams = [string, string] | [string, string, string];
 
 export class JoinClause implements QueryBlock {
   private tableName: string;
   private alias: string;
   private condition: string;
 
-  table(...params: TableParams): this {
+  table(...params: JoinTableParams): this {
     if (params.length === 2) {
       const [name, condition] = params;
       this.tableName = name;
@@ -26,9 +26,5 @@ export class JoinClause implements QueryBlock {
   toSql(): string {
     return new Sql('JOIN %s [AS %s] ON %s')
       .print([this.tableName, this.alias, this.condition]);
-  }
-
-  toPrettySql(): string {
-    return '';
   }
 }
