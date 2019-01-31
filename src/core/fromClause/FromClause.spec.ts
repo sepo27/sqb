@@ -47,4 +47,27 @@ describe('FromClause', () => {
       JOIN comment AS c ON c.id = u.commentId
     `);
   });
+
+  it('LEFT join', () => {
+    const fc = new FromClause()
+      .table('user', 'u')
+      .leftJoin('comment', 'c', 'c.id = u.commentId');
+
+    assertSql(fc, `
+      FROM user AS u
+      LEFT JOIN comment AS c ON c.id = u.commentId
+    `);
+  });
+
+  it('does not add duplicate LEFT join', () => {
+    const fc = new FromClause()
+      .table('user', 'u')
+      .leftJoin('comment', 'c', 'c.id = u.commentId')
+      .leftJoin('comment', 'c', 'c.id = u.commentId');
+
+    assertSql(fc, `
+      FROM user AS u
+      LEFT JOIN comment AS c ON c.id = u.commentId
+    `);
+  });
 });

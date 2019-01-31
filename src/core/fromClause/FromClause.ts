@@ -1,6 +1,6 @@
 import { QueryBlock } from '../interfaces'; // eslint-disable-line no-unused-vars
 import { Sql } from '../sql/Sql';
-import { JoinClause, JoinTableParams } from '../joinClause/JoinClause'; // eslint-disable-line no-unused-vars
+import { JoinClause, JoinTableParams, JoinType } from '../joinClause/JoinClause'; // eslint-disable-line no-unused-vars
 
 export class FromClause implements QueryBlock {
   private tableName: string;
@@ -19,6 +19,16 @@ export class FromClause implements QueryBlock {
     }
 
     this.joins.push(new JoinClause().table(...params));
+
+    return this;
+  }
+
+  leftJoin(...params: JoinTableParams): this {
+    if (this.joins.some(j => j.match(params, JoinType.LEFT))) {
+      return this;
+    }
+
+    this.joins.push(new JoinClause(JoinType.LEFT).table(...params));
 
     return this;
   }
