@@ -1,7 +1,7 @@
 import { Sql } from './Sql';
 import { SqlError } from './SqlError';
 
-describe('Sql', () => {
+describe('Sql print array', () => {
   it('from simple template', () => {
     expect(new Sql('FROM %s').print(['user']))
       .toEqual('FROM user');

@@ -1,7 +1,7 @@
 import { sprintf } from 'sprintf-js';
 import { SqlError } from './SqlError';
 
-type SqlParam = string | boolean | string[];
+type Param = string | boolean | string[];
 
 interface SqlPart {
   readonly part: string;
@@ -20,7 +20,7 @@ export class Sql {
     this.parse(sql);
   }
 
-  print(params: SqlParam[]): string {
+  print(params: Param[]): string {
     this.checkParamsCount(params.length);
 
     const printParts: string[] = [];

@@ -4,6 +4,8 @@
 npm-debug.log*
 .lock
 .env
+*.bak
+*.orig
 
 # Project
 node_modules
