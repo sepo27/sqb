@@ -14,8 +14,8 @@ describe('sqlParams()', () => {
     expect(sqlParams('id = ?', ['1'])).toEqual('id = 1');
   });
 
-  xit('replaces multiple array params', () => {
-    expect(sqlParams('id = ? ans userId = ?', ['1', 2]))
+  it('replaces multiple array params', () => {
+    expect(sqlParams('id = ? AND userId = ?', ['1', 2]))
       .toEqual('id = 1 AND userId = 2');
   });
 });

@@ -41,11 +41,19 @@ describe('JoinTable', () => {
     ).toThrowError(new JoinError('JOIN condition is not set.'));
   });
 
-  xit('with condition params args', () => {
+  it('with condition params args', () => {
     const join = new JoinTable('comment')
       .condition('id = commentId AND userId = ?', 1);
 
     expect(join.toSql())
       .toEqual('JOIN comment ON id = commentId AND userId = 1');
+  });
+
+  it('with condition array args', () => {
+    const join = new JoinTable('comment')
+      .condition('id = commentId AND (userId = ? OR authorId = ?)', [1, '2']);
+
+    expect(join.toSql())
+      .toEqual('JOIN comment ON id = commentId AND (userId = 1 OR authorId = 2)');
   });
 });

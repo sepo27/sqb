@@ -1,7 +1,7 @@
 import { Sql } from '../sql/Sql';
 import { SqlPrintable } from '../interfaces'; // eslint-disable-line no-unused-vars
 import { JoinError } from './JoinError';
-// import { isArr } from '../../util/isType';
+import { sqlParams, SqlParams } from '../sql/sqlParams'; // eslint-disable-line no-unused-vars
 
 export enum JoinType {
   CROSS = 'CROSS', // eslint-disable-line no-unused-vars
@@ -10,7 +10,8 @@ export enum JoinType {
 }
 
 type ConditionParam = string | number;
-type ConditionArgs = [string] | [string, ...ConditionParam[]];
+// type ConditionArgs = [string] | [string, ...ConditionParam[]];
+type ConditionArgs = [string] | [string, ...SqlParams];
 
 interface MatchParams {
   tableFactor: string;
@@ -28,7 +29,7 @@ export abstract class Join implements SqlPrintable {
   private type$: JoinType;
   private alias$: string;
   private condition$: string;
-  private conditionParams$: ConditionParam[];
+  private conditionParams$: SqlParams = [];
   private sql: Sql;
 
   constructor() {
@@ -73,9 +74,11 @@ export abstract class Join implements SqlPrintable {
 
     const
       type = this.type$ || false,
-      alias = this.alias$ || false;
+      alias = this.alias$ || false,
+      // @ts-ignore: TODO
+      condition = sqlParams(this.condition$, this.conditionParams$);
 
-    return this.sql.print([type, this.tableFactor(), alias, this.condition$]);
+    return this.sql.print([type, this.tableFactor(), alias, condition]);
   }
 
   protected abstract tableFactor(): string;
