@@ -23,6 +23,9 @@ then
   echo "=== Running lint"
   npm run lint:base `diff | grep -P "\.(js|jsx)$"`
   
+  echo "=== Compile dry"
+  npm run compile -- --noEmit
+  
   echo "\n=== Running tests"
   npm run test
 fi
